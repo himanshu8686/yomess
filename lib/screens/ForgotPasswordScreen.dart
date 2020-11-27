@@ -42,7 +42,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 height: size.height * 0.4,
                 width: size.width,
                 child: Container(
-                  margin: EdgeInsets.only(top: size.height * 0.09, left: 30),
+                  margin: EdgeInsets.only(top: size.height * 0.27, left: 30),
                   child: Text(
                     "Email to reset password",
                     style: headline2,
@@ -55,7 +55,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     borderRadius: BorderRadius.circular(15),
                     color: Colors.white,
                   ),
-                  margin: EdgeInsets.only(top: size.height * 0.05),
+                  margin: EdgeInsets.only(top: size.height * 0.001),
                   padding:
                       EdgeInsets.only(top: 50, right: 27, left: 27, bottom: 80),
                   width: size.width - 50,
@@ -107,7 +107,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     },
                     textColor: Theme.of(context).hintColor,
                     child: Text(
-                      "i don't have an account 2",
+                      "I remember my password return to login",
                     ),
                   ),
                 ),

@@ -43,7 +43,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 height: size.height * 0.35,
                 width: size.width,
                 child: Container(
-                  margin: EdgeInsets.only(top: size.height * 0.09, left: 30),
+                  margin: EdgeInsets.only(top: size.height * 0.17, left: 30),
                   child: Text(
                     "Lets start with register!",
                     style: headline2,

@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: size.height * 0.35,
                 width: size.width,
                 child: Container(
-                  margin: EdgeInsets.only(top: size.height * 0.09, left: 30),
+                  margin: EdgeInsets.only(top: size.height * 0.15, left: 30),
                   child: Text(
                     "Lets Start With Login",
                     style: headline2,
