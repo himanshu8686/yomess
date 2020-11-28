@@ -3,6 +3,7 @@ import 'package:indglobalyomess/components/CommonInputField.dart';
 import 'package:indglobalyomess/components/RoundButton.dart';
 import 'package:indglobalyomess/utils/Constant.dart';
 import 'package:indglobalyomess/utils/Headline.dart';
+import 'package:indglobalyomess/utils/NavigationHelper.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -105,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         FlatButton(
                           onPressed: () {
                             Navigator.of(context)
-                                .pushReplacementNamed('/Pages', arguments: 2);
+                                .pushReplacementNamed('/Pages');
                           },
                           shape: StadiumBorder(),
                           textColor: Theme.of(context).hintColor,
