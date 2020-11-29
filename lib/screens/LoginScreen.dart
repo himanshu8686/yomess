@@ -3,7 +3,6 @@ import 'package:indglobalyomess/components/CommonInputField.dart';
 import 'package:indglobalyomess/components/RoundButton.dart';
 import 'package:indglobalyomess/utils/Constant.dart';
 import 'package:indglobalyomess/utils/Headline.dart';
-import 'package:indglobalyomess/utils/NavigationHelper.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -20,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (currentBackPressTime == null ||
         now.difference(currentBackPressTime) > Duration(seconds: 2)) {
       currentBackPressTime = now;
-      method.showtoast("Tap again to leave", context);
+      Constant.showtoast("Tap again to leave", context);
       return Future.value(false);
     }
     return Future.value(true);

@@ -19,7 +19,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     if (currentBackPressTime == null ||
         now.difference(currentBackPressTime) > Duration(seconds: 2)) {
       currentBackPressTime = now;
-      method.showtoast("Tap again to leave", context);
+      Constant.showtoast("Tap again to leave", context);
       return Future.value(false);
     }
     return Future.value(true);

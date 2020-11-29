@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:indglobalyomess/screens/CartScreen.dart';
+import 'package:indglobalyomess/screens/ExploreScreen.dart';
+import 'package:indglobalyomess/screens/OurServicesScreen.dart';
+import 'package:indglobalyomess/screens/ProfileScreen.dart';
 import 'package:indglobalyomess/screens/home_screen.dart';
+import 'package:indglobalyomess/services/permission_service.dart';
 import 'package:indglobalyomess/utils/Constant.dart';
 import 'package:indglobalyomess/utils/NavigationHelper.dart';
 import 'package:indglobalyomess/utils/size_config.dart';
@@ -11,7 +15,26 @@ class Pages extends StatefulWidget {
 }
 
 class _PagesState extends State<Pages> {
-  List<Widget> _widgetOptions = <Widget>[HomeScreen(), CartScreen()];
+  @override
+  void initState() {
+    permissionAccess();
+    super.initState();
+  }
+
+  /**
+   *
+   */
+  Future permissionAccess() {
+    PermissionService().requestAllPermission();
+  }
+
+  List<Widget> _widgetOptions = <Widget>[
+    HomeScreen(),
+    CartScreen(),
+    OurServicesScreen(),
+    ExploreScreen(),
+    ProfileScreen()
+  ];
 
   int _currentSelected = 0;
 
@@ -46,11 +69,15 @@ class _PagesState extends State<Pages> {
       onTap: _onItemTapped,
       currentIndex: _currentSelected,
       type: BottomNavigationBarType.fixed,
-      selectedItemColor: kPrimaryAuthOrangeColor,
+      selectedItemColor: kPrimaryBlueColor,
       elevation: defaultSize,
       items: [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Cart')
+        BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Cart'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.room_service), label: 'Service'),
+        BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Explore'),
+        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile')
       ],
     );
   }
