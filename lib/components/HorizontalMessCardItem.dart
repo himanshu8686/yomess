@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:indglobalyomess/utils/Constant.dart';
 import 'package:indglobalyomess/utils/size_config.dart';
 
-class HorizontalMessCard extends StatefulWidget {
+class HorizontalMessCardItem extends StatefulWidget {
   @override
-  _HorizontalMessCardState createState() => _HorizontalMessCardState();
+  _HorizontalMessCardItemState createState() => _HorizontalMessCardItemState();
 }
 
-class _HorizontalMessCardState extends State<HorizontalMessCard> {
+class _HorizontalMessCardItemState extends State<HorizontalMessCardItem> {
   @override
   Widget build(BuildContext context) {
     //Initialize SizeConfig class
@@ -30,6 +30,7 @@ class _HorizontalMessCardState extends State<HorizontalMessCard> {
             Expanded(
               flex: 2,
               child: Stack(
+                alignment: Alignment.bottomLeft,
                 children: [
                   Container(
                     decoration: BoxDecoration(
@@ -40,6 +41,54 @@ class _HorizontalMessCardState extends State<HorizontalMessCard> {
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsets.all(defaultSize),
+                    child: Row(
+                      children: [
+                        InkWell(
+                          onTap: () => {},
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: kDarkGreen,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
+                            child: Text(
+                              'Delivery',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: defaultSize,
+                        ),
+                        InkWell(
+                          onTap: () => {},
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: kPrimaryBlueColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
+                            child: Text(
+                              'Pickup',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
@@ -61,18 +110,16 @@ class _HorizontalMessCardState extends State<HorizontalMessCard> {
                             softWrap: true,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: defaultSize * 1.8),
+                            style: Constant.textBoldHeading(
+                                kFontColor: Colors.black),
                           ),
                           Text(
                             'tasty and home delivery',
                             softWrap: true,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
-                            style: TextStyle(
-                                fontSize: defaultSize * 1.6,
-                                color: Colors.grey[700]),
+                            style: Constant.textSubtitle(
+                                kFontColor: Colors.grey[600]),
                           )
                         ],
                       ),

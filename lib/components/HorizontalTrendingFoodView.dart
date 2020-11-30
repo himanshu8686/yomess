@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:indglobalyomess/components/HorizontalMessCardItem.dart';
-import 'package:indglobalyomess/utils/Constant.dart';
+import 'package:indglobalyomess/components/HorizontalTrendingFoodCardItem.dart';
 import 'package:indglobalyomess/utils/size_config.dart';
 
-class HorizontalMessView extends StatefulWidget {
+class HorizontalTrendingFoodView extends StatefulWidget {
   @override
-  _HorizontalMessViewState createState() => _HorizontalMessViewState();
+  _HorizontalTrendingFoodViewState createState() =>
+      _HorizontalTrendingFoodViewState();
 }
 
-class _HorizontalMessViewState extends State<HorizontalMessView> {
+class _HorizontalTrendingFoodViewState
+    extends State<HorizontalTrendingFoodView> {
   @override
   Widget build(BuildContext context) {
     //Initialize SizeConfig class
@@ -16,16 +18,19 @@ class _HorizontalMessViewState extends State<HorizontalMessView> {
 
     double defaultSize =
         SizeConfig.defaultSize; // default size is approximately 10
+
     return AspectRatio(
-      aspectRatio: defaultSize * 0.175,
+      aspectRatio: defaultSize * 0.18,
       child: Container(
         child: ListView(
           physics: AlwaysScrollableScrollPhysics(),
           scrollDirection: Axis.horizontal,
           children: [
-            HorizontalMessCardItem(),
-            HorizontalMessCardItem(),
-            HorizontalMessCardItem()
+            HorizontalTrendingFoodCardItem(),
+            HorizontalTrendingFoodCardItem(),
+            HorizontalTrendingFoodCardItem(),
+            HorizontalTrendingFoodCardItem(),
+            HorizontalTrendingFoodCardItem(),
           ],
         ),
       ),

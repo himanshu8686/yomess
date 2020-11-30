@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:indglobalyomess/components/FoodCategoryView.dart';
 import 'package:indglobalyomess/components/HorizontalMessView.dart';
+import 'package:indglobalyomess/components/HorizontalTrendingFoodView.dart';
 import 'package:indglobalyomess/services/permission_service.dart';
 import 'package:indglobalyomess/utils/Constant.dart';
 import 'package:indglobalyomess/utils/size_config.dart';
@@ -22,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 ///
-///
+/// This is the class responsible for the Home Screen's Body
 ///
 class HomeBody extends StatefulWidget {
   @override
@@ -45,12 +47,14 @@ class _HomeBodyState extends State<HomeBody> {
               SizedBox(
                 height: defaultSize * 2,
               ),
+
+              /************** Search Text Field ****************/
               TextField(
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
                   // contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                  contentPadding: EdgeInsets.symmetric(vertical: defaultSize),
+                  contentPadding: EdgeInsets.symmetric(vertical: 0),
                   prefixIcon: Icon(
                     Icons.search,
                     color: kPrimaryBlueColor,
@@ -68,19 +72,24 @@ class _HomeBodyState extends State<HomeBody> {
                       Radius.circular(defaultSize),
                     ),
                   ),
-                  hintStyle: new TextStyle(color: Colors.grey[500]),
+                  hintStyle:
+                      Constant.normalBodyText(kFontColor: Colors.grey[500]),
                 ),
               ),
               SizedBox(
-                height: defaultSize,
+                height: defaultSize * 2,
               ),
+
+              /************** Image carousel view  ****************/
               AspectRatio(
                 aspectRatio: defaultSize * 0.25,
                 child: Container(color: kPrimaryBlueColor),
               ),
               SizedBox(
-                height: defaultSize,
+                height: defaultSize * 2,
               ),
+
+              /************** Top mess row ****************/
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -93,6 +102,8 @@ class _HomeBodyState extends State<HomeBody> {
                         maxLines: 1,
                         softWrap: false,
                         overflow: TextOverflow.fade,
+                        style:
+                            Constant.textBoldHeading(kFontColor: Colors.black),
                       ),
                     ),
                   ),
@@ -101,10 +112,17 @@ class _HomeBodyState extends State<HomeBody> {
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
+                        color: kLightGrey,
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                       ),
-                      child: Text('Delivery'),
+                      child: Text(
+                        'Delivery',
+                        style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -115,10 +133,17 @@ class _HomeBodyState extends State<HomeBody> {
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
+                        color: kLightGrey,
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                       ),
-                      child: Text('Pickup'),
+                      child: Text(
+                        'Pickup',
+                        style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white),
+                      ),
                     ),
                   )
                 ],
@@ -126,8 +151,75 @@ class _HomeBodyState extends State<HomeBody> {
               SizedBox(
                 height: defaultSize,
               ),
-              // Mess Horizontal List
+
+              /************** Horizontal Mess List view  ****************/
               HorizontalMessView(),
+              SizedBox(
+                height: defaultSize * 2,
+              ),
+
+              /************** Trending this week row ****************/
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(Icons.trending_up),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: defaultSize),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Trending this week',
+                            style: Constant.textBoldHeading(
+                                kFontColor: Colors.black),
+                          ),
+                          Text(
+                            'Click on the food to get the more details about it',
+                            style:
+                                Constant.normalBodyText(kFontColor: kLightGrey),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: defaultSize * 2,
+              ),
+
+              /************** Horizontal Trending food list  ****************/
+              HorizontalTrendingFoodView(),
+              SizedBox(
+                height: defaultSize * 2,
+              ),
+
+              /************** Food categories heading row  ****************/
+
+              Row(
+                children: [
+                  Icon(Icons.category),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: defaultSize),
+                    child: Text(
+                      'Food Categories',
+                      style: Constant.textBoldHeading(kFontColor: Colors.black),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: defaultSize * 2,
+              ),
+
+              /************** Food categories list  ****************/
+              FoodCategoryView(),
+              SizedBox(
+                height: defaultSize * 2,
+              ),
             ],
           ),
         ),
