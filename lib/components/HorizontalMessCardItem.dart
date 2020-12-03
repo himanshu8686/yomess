@@ -136,6 +136,10 @@ class _HorizontalMessCardItemState extends State<HorizontalMessCardItem> {
                           elevation: 0,
                           color: kPrimaryBlueColor,
                           onPressed: () => {},
+                          child: Padding(
+                            padding: EdgeInsets.all(defaultSize * 0.5),
+                            child: Image.asset('assets/img/diamond_icon.png'),
+                          ),
                         ),
                       ),
                     ),

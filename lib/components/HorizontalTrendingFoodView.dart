@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:indglobalyomess/components/HorizontalMessCardItem.dart';
 import 'package:indglobalyomess/components/HorizontalTrendingFoodCardItem.dart';
 import 'package:indglobalyomess/utils/size_config.dart';
 

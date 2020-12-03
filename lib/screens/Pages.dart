@@ -203,10 +203,8 @@ class _PagesState extends State<Pages> {
   AppBar buildAppBar() {
     return AppBar(
       leading: IconButton(
-        icon: Icon(
-          Icons.sort,
-          color: Colors.black,
-        ),
+        padding: EdgeInsets.all(10),
+        icon: Image.asset('assets/img/drawer_icon.png'),
         onPressed: () {
           _scaffoldKey.currentState.openDrawer();
         },

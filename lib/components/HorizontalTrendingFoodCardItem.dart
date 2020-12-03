@@ -80,12 +80,19 @@ class _HorizontalTrendingFoodCardItemState
                       style: Constant.textBoldHeading(),
                     ),
                     Expanded(
-                      child: Text(
-                        'Double Cheese pizza',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: true,
-                        style: Constant.normalBodyText(kFontColor: kLightGrey,fontSize: defaultSize *  1.6,height: defaultSize * 0.13,letterSpacing: defaultSize * 0.05),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Double Cheese pizza',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
+                          style: TextStyle(
+                              fontSize: defaultSize * 1.6,
+                              fontFamily: 'Poppins',
+                              color: kLightGrey,
+                              height: defaultSize * 0.13),
+                        ),
                       ),
                     )
                   ],
