@@ -20,7 +20,7 @@ class _HorizontalTrendingFoodViewState
         SizeConfig.defaultSize; // default size is approximately 10
 
     return AspectRatio(
-      aspectRatio: defaultSize * 0.18,
+      aspectRatio: defaultSize * 0.16,
       child: Container(
         child: ListView(
           physics: AlwaysScrollableScrollPhysics(),

@@ -29,11 +29,14 @@ class Constant {
         color: kFontColor);
   }
 
-  static normalBodyText({var kFontColor}) {
+  static normalBodyText({var kFontColor,var fontSize,var height,var letterSpacing}) {
     return TextStyle(
         fontFamily: 'Poppins',
         fontWeight: FontWeight.w400,
-        fontSize: SizeConfig.defaultSize * 1.6,
+        // fontSize: SizeConfig.defaultSize * 1.6,
+        fontSize: fontSize,
+        height: height,
+        letterSpacing: letterSpacing,
         color: kFontColor);
   }
 
