@@ -85,7 +85,11 @@ class _HorizontalTrendingFoodCardItemState
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         softWrap: true,
-                        style: Constant.normalBodyText(kFontColor: kLightGrey,fontSize: defaultSize *  1.6,height: defaultSize * 0.13,letterSpacing: defaultSize * 0.05),
+                        style: Constant.normalBodyText(
+                            kFontColor: kLightGrey,
+                            fontSize: defaultSize * 1.6,
+                            height: defaultSize * 0.13,
+                            letterSpacing: defaultSize * 0.05),
                       ),
                     )
                   ],

@@ -93,7 +93,7 @@ class _HomeBodyState extends State<HomeBody> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(Icons.outdoor_grill),
+                  ImageIcon(AssetImage('assets/img/chef_icon.png')),
                   Expanded(
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: defaultSize),

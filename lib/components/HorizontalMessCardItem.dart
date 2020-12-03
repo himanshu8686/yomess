@@ -135,7 +135,9 @@ class _HorizontalMessCardItemState extends State<HorizontalMessCardItem> {
                         child: RaisedButton(
                           elevation: 0,
                           color: kPrimaryBlueColor,
-                          onPressed: () => {},
+                          onPressed: () {},
+                          child: Image(
+                              image: AssetImage("assets/img/diamond_icon.png")),
                         ),
                       ),
                     ),
