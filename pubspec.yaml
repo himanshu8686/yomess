@@ -57,6 +57,9 @@ flutter:
     - assets/img/
     - assets/img/facebook.jpg
     - assets/img/google.jpg
+    - assets/img/chef_icon.png
+    - assets/img/diamond_icon.png
+    - assets/img/drawer_icon.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
