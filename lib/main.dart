@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:indglobalyomess/screens/LoginScreen.dart';
 import 'package:indglobalyomess/screens/home_screen.dart';
 import 'package:indglobalyomess/route_generator.dart';
-import 'package:indglobalyomess/utils/Constant.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,9 +22,11 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: RouteGenerator.generateRoute,
       theme: ThemeData(
         appBarTheme: AppBarTheme(
-            color: Colors.white, elevation: 0, brightness: Brightness.light),
+            color: Colors.transparent,
+            elevation: 0,
+            brightness: Brightness.light),
         primaryColor: Colors.white,
-        scaffoldBackgroundColor: kWhitishGrey,
+        scaffoldBackgroundColor: Colors.white,
       ),
       home: LoginScreen(),
     );

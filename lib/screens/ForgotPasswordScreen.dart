@@ -3,6 +3,7 @@ import 'package:indglobalyomess/components/CommonInputField.dart';
 import 'package:indglobalyomess/components/RoundButton.dart';
 import 'package:indglobalyomess/utils/Constant.dart';
 import 'package:indglobalyomess/utils/Headline.dart';
+import '../utils/app_config.dart' as config;
 
 class ForgotPasswordScreen extends StatefulWidget {
   @override
@@ -19,7 +20,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     if (currentBackPressTime == null ||
         now.difference(currentBackPressTime) > Duration(seconds: 2)) {
       currentBackPressTime = now;
-      Constant.showtoast("Tap again to leave", context);
+      ShowToast.showDialog("Tap again to leave", context);
       return Future.value(false);
     }
     return Future.value(true);
@@ -41,8 +42,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 color: kPrimaryAuthOrangeColor,
                 height: size.height * 0.4,
                 width: size.width,
+              ),
+              Positioned(
+                top: config.App(context).appHeight(37) - 120,
+                left: 30,
                 child: Container(
-                  margin: EdgeInsets.only(top: size.height * 0.27, left: 30),
+                  width: config.App(context).appWidth(84),
+                  height: config.App(context).appHeight(37),
                   child: Text(
                     "Email to reset password",
                     style: headline2,

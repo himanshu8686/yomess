@@ -1,8 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:indglobalyomess/components/CommonInputField.dart';
 import 'package:indglobalyomess/components/RoundButton.dart';
+import 'package:indglobalyomess/screens/home_screen.dart';
 import 'package:indglobalyomess/utils/Constant.dart';
 import 'package:indglobalyomess/utils/Headline.dart';
+import 'package:indglobalyomess/utils/pin_entry_text_field.dart';
+import '../utils/app_config.dart' as config;
 
 class SignupScreen extends StatefulWidget {
   @override
@@ -11,18 +16,94 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   DateTime currentBackPressTime;
-  TextEditingController email = TextEditingController();
+  String _storageKeyMobileToken = 'token';
+  TextEditingController name = TextEditingController();
+  TextEditingController phone = TextEditingController();
   TextEditingController password = TextEditingController();
+
+  /**
+   * Get device token from FireBase
+   */
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  getTokenz() async {
+    _storageKeyMobileToken = await _firebaseMessaging.getToken();
+    print("getTokenz fcm token -->$_storageKeyMobileToken");
+  }
 
   Future<bool> _onBackButtonPressed() async {
     DateTime now = DateTime.now();
     if (currentBackPressTime == null ||
         now.difference(currentBackPressTime) > Duration(seconds: 2)) {
       currentBackPressTime = now;
-      Constant.showtoast("Tap again to leave", context);
+      ShowToast.showDialog("Tap again to leave", context);
       return Future.value(false);
     }
     return Future.value(true);
+  }
+
+  Future _ackAlert(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Please Enter OTP'),
+          content: Container(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: PinEntryTextField(
+                fields: 6,
+                showFieldAsBox: true,
+                isTextObscure: true,
+                onSubmit: (String pin) {
+                  print(pin);
+                },
+              ),
+            ),
+          ),
+          actions: [
+            FlatButton(
+              onPressed: () {
+                /*FirebaseAuth.instance.currentUser.then(
+                  (user) {
+                    if (user != null) {
+                      Navigator.of(context).pop();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                      );
+                    } else {
+                      Navigator.of(context).pop();
+                      signIn(smssent);
+                    }
+                  },
+                );*/
+                Navigator.pop(context);
+
+                if (FirebaseAuth.instance.currentUser != null) {
+                  print("----------------------------------------------------");
+                  if (FirebaseAuth.instance.currentUser.uid.isNotEmpty) {
+//                    Navigator.of(context).pop();
+//                    Navigator.push(
+//                      context,
+//                      MaterialPageRoute(builder: (context) => HomeScreen()),
+//                    );
+                    ShowToast.showDialog("Otp Verified", context);
+                  } else {
+                    ShowToast.showDialog("Wrong OTP", context);
+                  }
+                } else {
+                  ShowToast.showDialog("Wrong OTP", context);
+                }
+              },
+              child: Text(
+                'done',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -41,10 +122,13 @@ class _SignupScreenState extends State<SignupScreen> {
                 color: kPrimaryAuthOrangeColor,
                 height: size.height * 0.35,
                 width: size.width,
+              ),
+              Positioned(
+                top: config.App(context).appHeight(29.5) - 120,
+                left: 30,
                 child: Container(
-                  margin: EdgeInsets.only(top: size.height * 0.17, left: 30),
                   child: Text(
-                    "Lets start with register!",
+                    "Lets Start With Signup",
                     style: headline2,
                   ),
                 ),
@@ -65,21 +149,21 @@ class _SignupScreenState extends State<SignupScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CommonInputField(
-                          labelText: 'John Doe',
-                          hintText: 'Full name',
-                          prefixIcon: Icon(Icons.alternate_email,
+                          labelText: 'Full name',
+                          hintText: 'John Deo',
+                          prefixIcon: Icon(Icons.person_outline,
                               color: kPrimaryAuthOrangeColor),
-                          type: TextInputType.emailAddress,
-                          controller: email,
+                          type: TextInputType.text,
+                          controller: name,
                         ),
                         SizedBox(height: 30),
                         CommonInputField(
-                          labelText: 'Email',
-                          hintText: 'johndoe@gmail.com',
+                          labelText: 'Phone No',
+                          hintText: '+911234567890',
                           prefixIcon: Icon(Icons.alternate_email,
                               color: kPrimaryAuthOrangeColor),
                           type: TextInputType.emailAddress,
-                          controller: email,
+                          controller: phone,
                         ),
                         SizedBox(height: 30),
                         CommonInputField(
@@ -94,7 +178,18 @@ class _SignupScreenState extends State<SignupScreen> {
                         SizedBox(height: 30),
                         RoundButton(
                           color: kPrimaryAuthOrangeColor,
-                          onPressed: () {},
+                          onPressed: () {
+                            _ackAlert(context);
+                            /*sendOTP();*/
+
+                            /*if (_isValidate(
+                              password: password.text,
+                              phone: phone.text,
+                              name: name.text,
+                            )) {
+                              sendOTP();
+                            }*/
+                          },
                           text: 'Register',
                         ),
                       ],
@@ -119,5 +214,72 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       ),
     );
+  }
+
+  /*
+  * To Send OTP
+  * */
+  String smssent, verificationId;
+  Future<void> sendOTP() async {
+    final PhoneCodeAutoRetrievalTimeout autoRetrieve = (String verId) {
+      this.verificationId = verId;
+    };
+    final PhoneCodeSent smsCodeSent = (String verId, [int forceCodeResent]) {
+      this.verificationId = verId;
+      print("Code Sent");
+      _ackAlert(context);
+    };
+    final PhoneVerificationCompleted verifiedSuccess = (AuthCredential auth) {};
+    final PhoneVerificationFailed verifyFailed = (FirebaseAuthException e) {
+      print('${e.message}');
+    };
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: phone.text,
+      timeout: const Duration(seconds: 5),
+      verificationCompleted: verifiedSuccess,
+      verificationFailed: verifyFailed,
+      codeSent: smsCodeSent,
+      codeAutoRetrievalTimeout: autoRetrieve,
+    );
+  }
+
+/*
+* Check OTP*/
+  Future<void> signIn(String smsCode) async {
+    final AuthCredential credential = PhoneAuthProvider.getCredential(
+      verificationId: verificationId,
+      smsCode: smsCode,
+    );
+
+    await FirebaseAuth.instance.signInWithCredential(credential).then((user) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(),
+        ),
+      );
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
+  bool _isValidate({
+    String phone,
+    String password,
+    String name,
+  }) {
+    if (name.isEmpty) {
+      ShowToast.showDialog('Enter your Full Name', context);
+      return false;
+    }
+    if (phone.isEmpty) {
+      ShowToast.showDialog('Enter your Phone Number', context);
+      return false;
+    }
+    if (password.isEmpty) {
+      ShowToast.showDialog('Enter your password', context);
+      return false;
+    }
+    return true;
   }
 }

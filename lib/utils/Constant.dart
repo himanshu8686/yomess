@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:indglobalyomess/utils/size_config.dart';
 import 'package:toast/toast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:indglobalyomess/utils/size_config.dart';
 
 final kPrimaryAuthOrangeColor = Color(0xFFEA5C44);
 final kPrimaryAuthWhiteColor = Color(0xFFFE0E5E9);
@@ -29,7 +30,8 @@ class Constant {
         color: kFontColor);
   }
 
-  static normalBodyText({var kFontColor,var fontSize,var height,var letterSpacing}) {
+  static normalBodyText(
+      {var kFontColor, var fontSize, var height, var letterSpacing}) {
     return TextStyle(
         fontFamily: 'Poppins',
         fontWeight: FontWeight.w400,
@@ -47,4 +49,27 @@ class Constant {
         fontSize: SizeConfig.defaultSize * 1.4,
         color: kFontColor);
   }
+}
+
+class ShowToast {
+  static showDialog(String msg, context) {
+    Toast.show(
+      msg,
+      context,
+      duration: Toast.LENGTH_SHORT,
+      gravity: Toast.BOTTOM,
+      textColor: Colors.white,
+    );
+  }
+}
+
+const BASE_URL = 'https://phplaravel-187449-1606343.cloudwaysapps.com/api/';
+const LOGIN = 'login';
+const GOOGLE_LOGIN = 'google-login';
+const FACEBOOK_LOGIN = 'facebook-login';
+
+Future getSharedPrefData({String key}) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var data = prefs.getString(key);
+  return data;
 }

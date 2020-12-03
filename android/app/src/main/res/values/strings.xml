@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">YoMess.</string>
+    <string name="facebook_app_id">773818499867852</string>
+    <string name="fb_login_protocol_scheme">fb773818499867852</string>
+</resources>
