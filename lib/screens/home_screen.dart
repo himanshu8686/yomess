@@ -37,8 +37,8 @@ class _HomeBodyState extends State<HomeBody> {
     double defaultSize =
         SizeConfig.defaultSize; // default size is approximately 10
 
-    return SafeArea(
-      child: Container(
+    return Scaffold(
+      body: Container(
         padding: EdgeInsets.symmetric(horizontal: defaultSize * 1.5), //15
         child: SingleChildScrollView(
           physics: AlwaysScrollableScrollPhysics(),

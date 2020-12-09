@@ -1,11 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:indglobalyomess/screens/LoginScreen.dart';
 import 'package:indglobalyomess/screens/home_screen.dart';
 import 'package:indglobalyomess/route_generator.dart';
 
-void main() {
-  runApp(MyApp());
+import 'get_state/get_user_state.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  final Controller controller = Get.put(Controller());
+  runApp(
+    MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {

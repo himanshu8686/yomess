@@ -29,8 +29,9 @@ Future facebookLogin(BuildContext context) async {
     case FacebookLoginStatus.error:
       print(result.errorMessage);
       print(
-          'Something went wrong with the login process.\n'
-          'Here\'s the error Facebook gave us: ${result.errorMessage}',);
+        'Something went wrong with the login process.\n'
+        'Here\'s the error Facebook gave us: ${result.errorMessage}',
+      );
       break;
   }
   return facebookData;

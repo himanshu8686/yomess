@@ -6,6 +6,7 @@ import 'package:indglobalyomess/components/RoundButton.dart';
 import 'package:indglobalyomess/screens/home_screen.dart';
 import 'package:indglobalyomess/utils/Constant.dart';
 import 'package:indglobalyomess/utils/Headline.dart';
+import 'package:indglobalyomess/utils/network_dio.dart';
 import 'package:indglobalyomess/utils/pin_entry_text_field.dart';
 import '../utils/app_config.dart' as config;
 
@@ -25,6 +26,7 @@ class _SignupScreenState extends State<SignupScreen> {
    * Get device token from FireBase
    */
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
   getTokenz() async {
     _storageKeyMobileToken = await _firebaseMessaging.getToken();
     print("getTokenz fcm token -->$_storageKeyMobileToken");
@@ -55,7 +57,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 showFieldAsBox: true,
                 isTextObscure: true,
                 onSubmit: (String pin) {
-                  print(pin);
+                  signIn(pin);
                 },
               ),
             ),
@@ -77,6 +79,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     }
                   },
                 );*/
+
                 Navigator.pop(context);
 
                 if (FirebaseAuth.instance.currentUser != null) {
@@ -178,17 +181,16 @@ class _SignupScreenState extends State<SignupScreen> {
                         SizedBox(height: 30),
                         RoundButton(
                           color: kPrimaryAuthOrangeColor,
-                          onPressed: () {
-                            _ackAlert(context);
+                          onPressed: () async {
                             /*sendOTP();*/
-
-                            /*if (_isValidate(
+                            if (_isValidate(
                               password: password.text,
                               phone: phone.text,
                               name: name.text,
                             )) {
-                              sendOTP();
-                            }*/
+                              await sendOTP();
+                              _ackAlert(context);
+                            }
                           },
                           text: 'Register',
                         ),
@@ -220,6 +222,7 @@ class _SignupScreenState extends State<SignupScreen> {
   * To Send OTP
   * */
   String smssent, verificationId;
+
   Future<void> sendOTP() async {
     final PhoneCodeAutoRetrievalTimeout autoRetrieve = (String verId) {
       this.verificationId = verId;
@@ -229,7 +232,9 @@ class _SignupScreenState extends State<SignupScreen> {
       print("Code Sent");
       _ackAlert(context);
     };
-    final PhoneVerificationCompleted verifiedSuccess = (AuthCredential auth) {};
+    final PhoneVerificationCompleted verifiedSuccess = (AuthCredential auth) {
+      print('phone verification is successful');
+    };
     final PhoneVerificationFailed verifyFailed = (FirebaseAuthException e) {
       print('${e.message}');
     };
@@ -251,13 +256,23 @@ class _SignupScreenState extends State<SignupScreen> {
       smsCode: smsCode,
     );
 
-    await FirebaseAuth.instance.signInWithCredential(credential).then((user) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomeScreen(),
-        ),
-      );
+    await FirebaseAuth.instance
+        .signInWithCredential(credential)
+        .then((user) async {
+      await NetworkDioHttp.setDynamicHeader(endPoint: BASE_URL);
+      Map<String, dynamic> response =
+          await NetworkDioHttp.sendingFormDataDioHttpMethod(context,
+              url: 'register',
+              data: {
+            'name': name.text,
+            'country_code': '+91',
+            'mobile': phone.text,
+            'password': password.text,
+            'device_token':
+                '81335A9855F060EB73412AD66367576368CFFDA041B25991B148E6A6FAC823C0'
+          });
+
+      Navigator.pushReplacementNamed(context, '/Pages');
     }).catchError((e) {
       print(e);
     });

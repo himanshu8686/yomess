@@ -1,6 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:indglobalyomess/components/CommonInputField.dart';
 import 'package:indglobalyomess/components/RoundButton.dart';
+import 'package:indglobalyomess/get_state/get_user_state.dart';
 import 'package:indglobalyomess/screens/home_screen.dart';
 import 'package:indglobalyomess/utils/Constant.dart';
 import 'package:indglobalyomess/utils/FacebookLogin.dart';
@@ -11,6 +14,7 @@ import 'package:indglobalyomess/utils/network_dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import '../utils/app_config.dart' as config;
+import 'Pages.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -22,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
     getTokenz();
   }
 
+  final Controller controller = Get.find();
   DateTime currentBackPressTime;
   String _storageKeyMobileToken = 'token';
   var userdata;
@@ -66,9 +71,9 @@ class _LoginScreenState extends State<LoginScreen> {
       });
       if (userdata['response'] == true) {
         await setUserData();
+        controller.isUserLogIn = RxBool(true);
         ShowToast.showDialog('${userdata['message']}', context);
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        Navigator.pushReplacementNamed(context, '/Pages');
       } else {
         ShowToast.showDialog('${userdata['message']}', context);
       }
@@ -138,17 +143,13 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         userdata = response['body'];
       });
-
+      print('userData from signIn method : $userdata');
       if (userdata != null) {
-        if (userdata['status'] == 1) {
+        if (userdata['message'] == 'Logged in successfully') {
           await setUserData();
           ShowToast.showDialog('${userdata['message']}', context);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => HomeScreen(),
-            ),
-          );
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Pages()));
         } else {
           ShowToast.showDialog('${userdata['message']}', context);
         }

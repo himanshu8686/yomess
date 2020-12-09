@@ -6,13 +6,13 @@ import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:indglobalyomess/Utils/internet_error.dart';
+import 'package:indglobalyomess/models/user_registeration_model.dart';
 import 'package:indglobalyomess/utils/Constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'process_indicator.dart';
 
 class NetworkDioHttp {
-  static Dio _dio;
   static String endPointUrl;
   static DioCacheManager _dioCacheManager;
   static Options _cacheOptions =
@@ -80,7 +80,7 @@ class NetworkDioHttp {
     if (context != null) processIndicator.show(context);
     try {
       Response response =
-          await _dio.get("$endPointUrl$url", options: _cacheOptions);
+          await Dio().get("$endPointUrl$url", options: _cacheOptions);
       if (response.statusCode == 200) {
         Map<String, dynamic> data = {
           'body': jsonEncode(response.data),
@@ -115,8 +115,8 @@ class NetworkDioHttp {
     print("??????$token????????");
     if (context != null) processIndicator.show(context);
     try {
-      Response response = await _dio.put("$endPointUrl$url",
-          data: data, options: _cacheOptions);
+      Response response = await Dio()
+          .put("$endPointUrl$url", data: data, options: _cacheOptions);
       print("$endPointUrl$url");
       print("########${response.headers}#########");
       if (response.statusCode == 200) {
@@ -252,9 +252,9 @@ class NetworkDioHttp {
     try {
       if (context != null) processIndicator.show(context);
       List<Response> response = await Future.wait([
-        _dio.post("$endPointUrl/$postUrl",
+        Dio().post("$endPointUrl/$postUrl",
             data: postData, options: _cacheOptions),
-        _dio.get("$endPointUrl/$getUrl", options: _cacheOptions)
+        Dio().get("$endPointUrl/$getUrl", options: _cacheOptions)
       ]);
       if (response[0].statusCode == 200 || response[0].statusCode == 200) {
         if (response[0].statusCode == 200 && response[1].statusCode != 200) {
@@ -310,12 +310,12 @@ class NetworkDioHttp {
     try {
       if (context != null) processIndicator.show(context);
       FormData formData = new FormData.fromMap(data);
-      Response response = await _dio.post("$endPointUrl$url",
-          data: formData, options: _cacheOptions);
+      Response response = await Dio()
+          .post("$endPointUrl$url", data: formData, options: _cacheOptions);
       if (response.statusCode == 200) {
         if (context != null) processIndicator.hide(context);
         return {
-          'body': json.decode(response.data),
+          'body': response.data,
           'headers': response.headers,
           'error_description': null,
         };
@@ -328,6 +328,7 @@ class NetworkDioHttp {
         };
       }
     } catch (error) {
+      print('error :  $error');
       Map<String, dynamic> responseData = {
         'body': null,
         'headers': null,

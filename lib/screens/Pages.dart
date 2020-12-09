@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:indglobalyomess/get_state/get_user_state.dart';
 import 'package:indglobalyomess/screens/CartScreen.dart';
 import 'package:indglobalyomess/screens/ExploreScreen.dart';
 import 'package:indglobalyomess/screens/OurServicesScreen.dart';
@@ -21,6 +24,7 @@ class _PagesState extends State<Pages> {
     super.initState();
   }
 
+  final Controller controller = Get.find();
   /**
    *
    */
@@ -87,112 +91,122 @@ class _PagesState extends State<Pages> {
    */
   Drawer buildDrawer(double defaultSize, BuildContext context) {
     return Drawer(
-      child: SafeArea(
-        child: ListView(
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(vertical: defaultSize),
-              decoration: BoxDecoration(color: Colors.black12),
-              child: ListTile(
-                leading: Icon(
-                  Icons.person,
-                  color: kPrimaryAuthOrangeColor,
-                  size: defaultSize * 3,
+      child: ListView(
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(vertical: defaultSize),
+            decoration: BoxDecoration(color: Colors.black12),
+            child: ListTile(
+              leading: Icon(
+                Icons.person,
+                color: kPrimaryAuthOrangeColor,
+                size: defaultSize * 3,
+              ),
+              title: Text(
+                'Guest',
+                style: TextStyle(
+                    color: kPrimaryAuthOrangeColor,
+                    fontSize: defaultSize * 2.2),
+              ),
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              _onItemTapped(NavigationHelper.HOME_INDEX);
+              Navigator.pop(context);
+            },
+            leading: Icon(
+              Icons.home,
+            ),
+            title: Text(
+              'Home',
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              _onItemTapped(NavigationHelper.CART_INDEX);
+              Navigator.pop(context);
+            },
+            leading: Icon(
+              Icons.shopping_cart,
+            ),
+            title: Text(
+              'Cart',
+            ),
+          ),
+          Divider(),
+          ListTile(
+            dense: true,
+            title: Text(
+              "Application preferences",
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
+            trailing: Icon(
+              Icons.remove,
+              color: Theme.of(context).focusColor.withOpacity(0.3),
+            ),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: Icon(
+              Icons.help,
+            ),
+            title: Text(
+              'Help And Support',
+            ),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: Icon(
+              Icons.settings,
+            ),
+            title: Text(
+              'Settings',
+            ),
+          ),
+          controller.isUserLogIn.obs == RxBool(true)
+              ? ListTile(
+                  onTap: () {},
+                  leading: Icon(
+                    Icons.exit_to_app,
+                  ),
+                  title: Text(
+                    'LogOut',
+                  ),
+                )
+              : ListTile(
+                  onTap: () {
+                    print(controller.isUserLogIn.obs);
+                  },
+                  leading: Icon(
+                    Icons.exit_to_app,
+                  ),
+                  title: Text(
+                    'Login',
+                  ),
                 ),
-                title: Text(
-                  'Guest',
-                  style: TextStyle(
-                      color: kPrimaryAuthOrangeColor,
-                      fontSize: defaultSize * 2.2),
-                ),
-              ),
+          ListTile(
+            onTap: () {},
+            leading: Icon(
+              Icons.person_add,
             ),
-            ListTile(
-              onTap: () {
-                _onItemTapped(NavigationHelper.HOME_INDEX);
-                Navigator.pop(context);
-              },
-              leading: Icon(
-                Icons.home,
-              ),
-              title: Text(
-                'Home',
-              ),
+            title: Text(
+              'Register',
             ),
-            ListTile(
-              onTap: () {
-                _onItemTapped(NavigationHelper.CART_INDEX);
-                Navigator.pop(context);
-              },
-              leading: Icon(
-                Icons.shopping_cart,
-              ),
-              title: Text(
-                'Cart',
-              ),
+          ),
+          Divider(),
+          ListTile(
+            dense: true,
+            title: Text(
+              "Version 1.0",
+              style: Theme.of(context).textTheme.bodyText2,
             ),
-            Divider(),
-            ListTile(
-              dense: true,
-              title: Text(
-                "Application preferences",
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-              trailing: Icon(
-                Icons.remove,
-                color: Theme.of(context).focusColor.withOpacity(0.3),
-              ),
+            trailing: Icon(
+              Icons.remove,
+              color: Theme.of(context).focusColor.withOpacity(0.3),
             ),
-            ListTile(
-              onTap: () {},
-              leading: Icon(
-                Icons.help,
-              ),
-              title: Text(
-                'Help And Support',
-              ),
-            ),
-            ListTile(
-              onTap: () {},
-              leading: Icon(
-                Icons.settings,
-              ),
-              title: Text(
-                'Settings',
-              ),
-            ),
-            ListTile(
-              onTap: () {},
-              leading: Icon(
-                Icons.exit_to_app,
-              ),
-              title: Text(
-                'Login',
-              ),
-            ),
-            ListTile(
-              onTap: () {},
-              leading: Icon(
-                Icons.person_add,
-              ),
-              title: Text(
-                'Register',
-              ),
-            ),
-            Divider(),
-            ListTile(
-              dense: true,
-              title: Text(
-                "Version 1.0",
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-              trailing: Icon(
-                Icons.remove,
-                color: Theme.of(context).focusColor.withOpacity(0.3),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -109,7 +109,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   alignment: Alignment.bottomCenter,
                   child: FlatButton(
                     onPressed: () {
-                      Navigator.of(context).pushNamed('/SignUp');
+                      Navigator.of(context).pushNamed('/Login');
                     },
                     textColor: Theme.of(context).hintColor,
                     child: Text(
