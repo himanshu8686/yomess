@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:indglobalyomess/components/FoodCategoryCardItem.dart';
+import 'package:indglobalyomess/components/food_category_carditem.dart';
 import 'package:indglobalyomess/utils/size_config.dart';
 
 class FoodCategoryView extends StatefulWidget {

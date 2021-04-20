@@ -23,6 +23,59 @@
           }
         },
         {
+          "client_id": "1016437174263-v7fudjtq42beabj8cmqjkf4bu5jt8s9d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.indglobalyomess",
+            "certificate_hash": "dd887981796fafff4358fbd6e05223508211e232"
+          }
+        },
+        {
+          "client_id": "1016437174263-1mqhcm2dvm3ejfk9suojq4o3n9mfp391.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsS-CVz38ncEQA0r1w9DlUejO_BYhKlD4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1016437174263-1mqhcm2dvm3ejfk9suojq4o3n9mfp391.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016437174263:android:a797b060bf645b609d48f2",
+        "android_client_info": {
+          "package_name": "com.indyomessowner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1016437174263-7nic1c7j8cvjm101bcm6hh99pf1ca28j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.indyomessowner",
+            "certificate_hash": "dd887981796fafff4358fbd6e05223508211e232"
+          }
+        },
+        {
+          "client_id": "1016437174263-hv5fndseq1n13u0epccclg29c934lg1q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.indyomessowner",
+            "certificate_hash": "195a327715b197aeccd4f535948ff2ecb088b915"
+          }
+        },
+        {
           "client_id": "1016437174263-1mqhcm2dvm3ejfk9suojq4o3n9mfp391.apps.googleusercontent.com",
           "client_type": 3
         }

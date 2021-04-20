@@ -7,7 +7,7 @@ import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:indglobalyomess/Utils/internet_error.dart';
 import 'package:indglobalyomess/models/user_registeration_model.dart';
-import 'package:indglobalyomess/utils/Constant.dart';
+import 'package:indglobalyomess/utils/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'process_indicator.dart';

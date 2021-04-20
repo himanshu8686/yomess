@@ -13,6 +13,5 @@ class _ExploreScreenState extends State<ExploreScreen> {
         child: Text('This is Explore screen'),
       ),
     );
-    ;
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:indglobalyomess/utils/Constant.dart';
+import 'package:indglobalyomess/utils/constant.dart';
 import 'package:indglobalyomess/utils/size_config.dart';
 
 class HorizontalMessCardItem extends StatefulWidget {

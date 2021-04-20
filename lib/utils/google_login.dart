@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import './Constant.dart';
+import './constant.dart';
 
 Future<GoogleSignInAccount> googleLogin(BuildContext context) async {
   GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -10,6 +10,7 @@ Future<GoogleSignInAccount> googleLogin(BuildContext context) async {
   );
 
   try {
+    _googleSignIn.signOut();
     await _googleSignIn.signIn();
     bool isSigned = await _googleSignIn.isSignedIn();
 

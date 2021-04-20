@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:indglobalyomess/components/CommonInputField.dart';
-import 'package:indglobalyomess/components/RoundButton.dart';
-import 'package:indglobalyomess/utils/Constant.dart';
-import 'package:indglobalyomess/utils/Headline.dart';
+import 'package:indglobalyomess/components/common_inputfield.dart';
+import 'package:indglobalyomess/components/round_button.dart';
+import 'package:indglobalyomess/utils/constant.dart';
+import 'package:indglobalyomess/utils/headline.dart';
 import '../utils/app_config.dart' as config;
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -73,8 +73,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         CommonInputField(
                           labelText: 'Email',
                           hintText: 'johndoe@gmail.com',
-                          prefixIcon: Icon(Icons.alternate_email,
-                              color: kPrimaryAuthOrangeColor),
+                          prefixIcon: Icon(
+                            Icons.alternate_email,
+                            color: kPrimaryAuthOrangeColor,
+                          ),
                           type: TextInputType.emailAddress,
                           controller: email,
                         ),

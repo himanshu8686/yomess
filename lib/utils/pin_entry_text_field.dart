@@ -2,7 +2,7 @@ library pin_entry_text_field;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:indglobalyomess/utils/Constant.dart';
+import 'package:indglobalyomess/utils/constant.dart';
 
 class PinEntryTextField extends StatefulWidget {
   final String lastPin;
@@ -17,10 +17,10 @@ class PinEntryTextField extends StatefulWidget {
       {this.lastPin,
       this.fields: 4,
       this.onSubmit,
-      this.fieldWidth: 38.0,
-      this.fontSize: 15.0,
-      this.isTextObscure: false,
-      this.showFieldAsBox: false})
+      this.fieldWidth = 50.0,
+      this.fontSize = 15.0,
+      this.isTextObscure = false,
+      this.showFieldAsBox = false})
       : assert(fields > 0);
 
   @override
@@ -102,7 +102,7 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
     return Container(
       width: widget.fieldWidth,
       margin: EdgeInsets.only(right: 5.0),
-      color: kPrimaryAuthOrangeColor,
+      color: Colors.white,
       child: TextField(
         controller: _textControllers[i],
         keyboardType: TextInputType.number,
@@ -117,14 +117,20 @@ class PinEntryTextFieldState extends State<PinEntryTextField> {
         focusNode: _focusNodes[i],
         obscureText: widget.isTextObscure,
         decoration: InputDecoration(
-          counterText: "",
-          border: OutlineInputBorder(),
-          /*border: widget.showFieldAsBox
+            hintText: '0',
+            hintStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 22,
+            ),
+            counterText: "",
+            border: OutlineInputBorder(),
+            focusedBorder: OutlineInputBorder()
+            /*border: widget.showFieldAsBox
               ? OutlineInputBorder(
             borderSide: BorderSide(width: 2.0),
       )
             : null,*/
-        ),
+            ),
         onChanged: (String str) {
           setState(() {
             _pin[i] = str;

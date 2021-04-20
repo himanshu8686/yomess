@@ -31,7 +31,7 @@ class InternetError {
                   height: 50,
                 ),
                 Text(
-                  "Please check your internet conncetion!",
+                  "Please check your internet connection!",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(

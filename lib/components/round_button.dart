@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:indglobalyomess/utils/Constant.dart';
+import 'package:indglobalyomess/utils/constant.dart';
 
 class RoundButton extends StatelessWidget {
   const RoundButton({
@@ -17,25 +17,20 @@ class RoundButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: this.color.withOpacity(0.4),
-            blurRadius: 40,
-            offset: Offset(0, 15),
-          ),
-          BoxShadow(
-            color: this.color.withOpacity(0.4),
-            blurRadius: 13,
-            offset: Offset(0, 3),
-          )
-        ],
-        borderRadius: BorderRadius.all(Radius.circular(100)),
-      ),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          boxShadow: [
+            BoxShadow(
+              color: color,
+              blurRadius: 30,
+              spreadRadius: -16,
+              offset: Offset(0, 5),
+            )
+          ]),
       child: FlatButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         onPressed: this.onPressed,
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 14),
         color: color,
-        shape: StadiumBorder(),
         child: Text(
           text,
           style: TextStyle(color: Colors.white),
